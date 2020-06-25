@@ -1,1 +1,18 @@
-<p>cargar-comidas works!</p>
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label for="comidaNueva">Agregá una nueva comida</label>
+            <input type="text" class="form-control" id="comidaNueva" aria-describedby="ayudaComida">
+            <small id="ayudaComida" class="form-text text-muted">Agregá una nueva comida así te la podemos sugerir.</small>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <button class="btn btn-secondary" (click)="volver()">Volver</button>
+            </div>
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-primary">Cargar</button>
+            </div>
+        </div>
+    </form>
+</div>
