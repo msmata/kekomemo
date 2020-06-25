@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-decision',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DecisionComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  volver() {
+    this.router.navigateByUrl('');
+  }
+
+  sugerencias() {
+    this.router.navigateByUrl('sugerencia');
+  }
+
+  agregarComidaHoy() {
+    alert("Listo, hoy comes la caca que cargaste");
+  }
 }
