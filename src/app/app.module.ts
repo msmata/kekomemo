@@ -7,6 +7,7 @@ import { CargarComidasComponent } from './paginas/cargar-comidas/cargar-comidas.
 import { InicioComponent } from './paginas/inicio/inicio.component';
 import { SugerenciaComponent } from './paginas/sugerencia/sugerencia.component';
 import { DecisionComponent } from './paginas/decision/decision.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { DecisionComponent } from './paginas/decision/decision.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule, 
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
