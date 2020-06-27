@@ -8,6 +8,7 @@ import { InicioComponent } from './paginas/inicio/inicio.component';
 import { SugerenciaComponent } from './paginas/sugerencia/sugerencia.component';
 import { DecisionComponent } from './paginas/decision/decision.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule, 
+    FormsModule,
+    HttpClientModule,
     ReactiveFormsModule
   ],
   providers: [],
