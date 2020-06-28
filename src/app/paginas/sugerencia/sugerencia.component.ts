@@ -13,8 +13,8 @@ export class SugerenciaComponent implements OnInit {
 
   comidas: Comida[];
   comidaSugerida: Comida;
-  private altaExitosa: boolean = false;
-  private altaConError: boolean = false;
+  altaExitosa: boolean = false;
+  altaConError: boolean = false;
 
   constructor(private router: Router, private comidaService: ComidaService, private registroService: RegistroService) { }
 

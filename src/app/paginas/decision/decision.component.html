@@ -1,18 +1,20 @@
 <div class="container">
     <ul class="list-group" *ngFor="let comida of comidas">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
+        <li class="list-group-item d-flex justify-content-between align-items-center" (click)="registrar(comida)">
           {{comida.nombre}}
           <span *ngIf="comida.dias > 0" class="badge badge-primary badge-pill">{{comida.dias}} días sin comer</span>
           <span *ngIf="comida.dias < 0" class="badge badge-primary badge-pill">¡Nuevo!</span>
         </li>
     </ul>
-
-    <div class="form-group">
-        <label for="comidaNueva">Agregá una nueva comida</label>
-        <input type="text" class="form-control" id="comidaNueva" aria-describedby="ayudaComida">
-        <small id="ayudaComida" class="form-text text-muted">Agregá una nueva comida para comer hoy</small>
-        <button type="submit" class="btn btn-primary" (click)="agregarComidaHoy()">Agregar y comer hoy</button>
-    </div>
+    
+    <form [formGroup]="formComida" (ngSubmit)="agregarComidaHoy()">
+        <div class="form-group">
+            <label for="comidaNueva">Agregá una nueva comida</label>
+            <input type="text" class="form-control" id="comidaNueva" aria-describedby="ayudaComida" formControlName="comidaNueva">
+            <small id="ayudaComida" class="form-text text-muted">Agregá una nueva comida para comer hoy</small>
+            <button type="submit" class="btn btn-primary">Agregar y comer hoy</button>
+        </div>
+    </form>
 
     <div class="row">
         <div class="col-md-6">
@@ -21,5 +23,11 @@
         <div class="col-md-6">
             <button type="submit" class="btn btn-primary" (click)="sugerencias()">Sugerime algo</button>
         </div>
+    </div>
+    <div class="row" *ngIf="altaExitosa">
+      <span>La comida fue registrada</span>
+    </div>
+    <div class="row" *ngIf="altaConError">
+        <span>La comida no pudo ser registrada. Inténtelo más tarde</span>
     </div>
 </div>
