@@ -14,8 +14,11 @@ export class ComidaService {
      return this.http.get<Comida[]>('http://localhost:8080/api/comida');
    }
 
-   public agregarComida(comida: string) {
-
+   public agregarComida(comida: string): Promise<void | Comida> {
+    return this.http.post('http://localhost:8080/api/comida', {nombre: comida})
+    .toPromise()
+    .then(response => response as Comida)
+    .catch(null); // handle error
    }
 
    public obtenerComida(id: number): Comida {
