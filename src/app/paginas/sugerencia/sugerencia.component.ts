@@ -10,7 +10,7 @@ import { ComidaService } from 'src/app/servicios/comida.service';
 })
 export class SugerenciaComponent implements OnInit {
 
-  private comidas: Comida[];
+  comidas: Comida[];
   comidaSugerida: Comida;
 
   constructor(private router: Router, private comidaService: ComidaService) { }
@@ -26,16 +26,26 @@ export class SugerenciaComponent implements OnInit {
   sugerirComida() {
 
     if (this.comidas.length == 0) {
-      this.comidaSugerida = {id:-1, nombre: "CACA", dias: 0};
+      this.comidaSugerida = {id:-1, nombre: "CACA", dias: 0, nueva: false};
       return;
     }
 
     let bolillero:Comida[] = [];
 
     this.comidas.forEach(c => {
-      for (let i = 0;i < c.dias;i++) {
-        bolillero.push(c);
+
+      if (c.dias == -1) {
+        c.nueva = true;
+        for (let i = 0;i < this.comidas.length;i++) {
+          bolillero.push(c);
+        }
+      } else {
+        c.nueva = false;
+        for (let i = 0;i < c.dias;i++) {
+          bolillero.push(c);
+        }
       }
+
     });
 
     this.girarBolillero(bolillero);

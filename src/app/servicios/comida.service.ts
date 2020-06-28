@@ -22,6 +22,6 @@ export class ComidaService {
    }
 
    public obtenerComida(id: number): Comida {
-      return {id: 1, nombre: "", dias: 1};
+      return {id: 1, nombre: "", dias: 1, nueva: false};
    }
 }

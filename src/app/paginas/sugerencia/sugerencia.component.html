@@ -3,7 +3,15 @@
         <img src="assets/cocinero.jpg" class="img-fluid">
     </div>
     <div class="row">
-        <h1>¿ACASO .... HOY.... QUERÉS COMER {{comidaSugerida.nombre}}? HACE {{comidaSugerida.dias}} DÍAS QUE NO COMES....</h1>
+        <h1 *ngIf="comidaSugerida.nueva">
+            ¿No querés probar esta nueva comida: {{comidaSugerida.nombre}}?
+        </h1>
+        <h1 *ngIf="!comidaSugerida.nueva">
+            Acaso .... hoy .... querés comer {{comidaSugerida.nombre}}? Hace {{comidaSugerida.dias}} días que no comes....
+        </h1>
+        <h1 *ngIf="comidaSugerida.id == -1">
+            Que la disfrutes
+        </h1>
     </div>
     <div class="row">
         <div class="col-md-4">
@@ -13,7 +21,8 @@
             <button type="submit" class="btn btn-primary" (click)="sugerirComida()">No me convence</button>
         </div>
         <div class="col-md-4">
-            <button type="submit" class="btn btn-primary">SI</button>
+            <button *ngIf="comidaSugerida.id == -1" type="submit" class="btn btn-primary" disabled>SI</button>
+            <button *ngIf="comidaSugerida.id != -1" type="submit" class="btn btn-primary">SI</button>
         </div>
     </div>
 </div>

@@ -6,9 +6,13 @@ module.exports = router;
 
 router.get('/api/comida', (req, res, next) => {
   const query = `SELECT co.id, co.nombre, min(DATEDIFF(CURDATE(), re.fecha)) as dias FROM comidas co
-                 INNER JOIN registros re
-                 ON co.id = re.f_idcomida
-                 GROUP BY co.id, co.nombre;`;
+                INNER JOIN registros re
+                on co.id = re.f_idcomida
+                GROUP BY co.id, co.nombre
+                UNION
+                SELECT co.id, co.nombre, -1 as dias
+                FROM comidas co
+                WHERE co.id NOT IN (SELECT f_idcomida from registros);`;
   connection.query(query, null, (err, result) => {
       if (err) {
           console.log(err);
