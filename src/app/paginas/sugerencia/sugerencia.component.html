@@ -22,7 +22,13 @@
         </div>
         <div class="col-md-4">
             <button *ngIf="comidaSugerida.id == -1" type="submit" class="btn btn-primary" disabled>SI</button>
-            <button *ngIf="comidaSugerida.id != -1" type="submit" class="btn btn-primary">SI</button>
+            <button *ngIf="comidaSugerida.id != -1" type="submit" class="btn btn-primary" (click)="registrarComida()">SI</button>
         </div>
+    </div>
+    <div class="row" *ngIf="altaExitosa">
+        <span>La comida {{comidaSugerida.nombre}} fue registrada</span>
+    </div>
+    <div class="row" *ngIf="altaConError">
+        <span>La comida {{comidaSugerida.nombre}} no pudo ser registrada. Inténtelo más tarde</span>
     </div>
 </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Comida } from 'src/app/modelo/comida';
 import { ComidaService } from 'src/app/servicios/comida.service';
+import { RegistroService } from 'src/app/servicios/registro.service';
 
 @Component({
   selector: 'app-sugerencia',
@@ -12,8 +13,10 @@ export class SugerenciaComponent implements OnInit {
 
   comidas: Comida[];
   comidaSugerida: Comida;
+  private altaExitosa: boolean = false;
+  private altaConError: boolean = false;
 
-  constructor(private router: Router, private comidaService: ComidaService) { }
+  constructor(private router: Router, private comidaService: ComidaService, private registroService: RegistroService) { }
 
   ngOnInit(): void {
     this.listarComidas();
@@ -21,6 +24,12 @@ export class SugerenciaComponent implements OnInit {
 
   volver() {
     this.router.navigateByUrl('');
+  }
+
+  registrarComida() {
+    this.registroService.grabarRegistro(this.comidaSugerida.id)
+    .then(() => this.altaExitosa = true)
+    .catch(() => this.altaConError = true);
   }
 
   sugerirComida() {

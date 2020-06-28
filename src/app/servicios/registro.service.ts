@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Registro } from '../modelo/registro';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegistroService {
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   obtenerUltimoRegistro(idComida: number): Registro {
     /*
@@ -20,6 +21,9 @@ export class RegistroService {
   }
 
   grabarRegistro(idComida: number) {
-    
+    return this.http.post('http://localhost:8080/api/registro', {idComida: idComida})
+    .toPromise()
+    .then(response => response)
+    .catch(null); // handle error
   }
 }

@@ -9,6 +9,7 @@ router.get('/api/comida', (req, res, next) => {
                 INNER JOIN registros re
                 on co.id = re.f_idcomida
                 GROUP BY co.id, co.nombre
+                HAVING dias > 0
                 UNION
                 SELECT co.id, co.nombre, -1 as dias
                 FROM comidas co
@@ -29,7 +30,7 @@ router.post('/api/comida', (req, res, next) => {
         return res.status(400).send('Falta el nombre de la comida');
     }
 
-    const nombreComida = req.body.nombre.toLowerCase();
+    const nombreComida = req.body.nombre;
     const query = `SELECT id FROM comidas WHERE nombre = '` + nombreComida + `'`;
     connection.query(query, null, (selecterr, selectresult) => {
         if (selecterr) {
@@ -47,6 +48,22 @@ router.post('/api/comida', (req, res, next) => {
                     }
                 });
             }
+        }
+    });
+});
+
+router.post('/api/registro', (req, res, next) => {
+    if (!req.body.idComida) {
+        return res.status(400).send('Falta el id de la comida');
+    }
+
+    const idComida = req.body.idComida;
+    const insert = "INSERT INTO registros (f_idcomida, fecha) VALUES (" + idComida + " , CURDATE());"
+    connection.query(insert, (inserterr, insertresult) => {
+        if (inserterr) {
+            return res.status(500).send('Error al guardar registro: ' + inserterr);
+        } else {
+            return res.json({ id : insertresult.insertId, idComida: idComida });
         }
     });
 });
