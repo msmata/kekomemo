@@ -1,22 +1,16 @@
+//Install express server
 const express = require('express');
-const bodyParser = require('body-parser')
-const app = express()
+const path = require('path');
 
-app.use(bodyParser.json())
+const app = express();
 
-// allow CORS when running locally
-app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
-  next()
-})
+// Serve only the static files form the dist directory
+app.use(express.static(__dirname + '/dist/kekomemo'));
 
-// add more endpoints by copying this pattern
-app.use(require('./api/recursos/comidas'))
-require('./api/recursos/comidas')
+app.get('/*', function(req,res) {
+    
+res.sendFile(path.join(__dirname+'/dist/kekomemo/index.html'));
+});
 
-// Start the api on port 8080
-app.listen(process.env.PORT || 8080)
-
-console.log("API is running at http://localhost:8080")
+// Start the app by listening on the default Heroku port
+app.listen(process.env.PORT || 8080);
