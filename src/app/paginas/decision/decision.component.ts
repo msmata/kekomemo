@@ -12,7 +12,7 @@ import { RegistroService } from 'src/app/servicios/registro.service';
 })
 export class DecisionComponent implements OnInit {
 
-  private formComida;
+  public formComida;
 
   constructor(private router: Router, private comidaService: ComidaService, private registroService: RegistroService, private formBuilder: FormBuilder) {
     this.formComida = this.formBuilder.group({
@@ -20,7 +20,7 @@ export class DecisionComponent implements OnInit {
     });
   }
 
-  private comidas: Comida[];
+  public comidas: Comida[];
   altaExitosa: boolean = false;
   altaConError: boolean = false;
 

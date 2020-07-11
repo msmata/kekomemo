@@ -11,8 +11,8 @@ import { Comida } from 'src/app/modelo/comida';
 })
 export class CargarComidasComponent implements OnInit {
 
-  private formComida;
-  private altaExitosa: boolean = false;
+  public formComida;
+  public altaExitosa: boolean = false;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private servicioComidas: ComidaService) {
     this.formComida = this.formBuilder.group({
